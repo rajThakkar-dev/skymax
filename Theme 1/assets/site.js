@@ -13,18 +13,21 @@
     toggle.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.textContent = open ? 'Close' : 'Menu';
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggle.classList.toggle('is-open', open);
     });
     nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
       nav.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.textContent = 'Menu';
+      toggle.setAttribute('aria-label', 'Open menu');
+      toggle.classList.remove('is-open');
     }));
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         nav.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.textContent = 'Menu';
+        toggle.setAttribute('aria-label', 'Open menu');
+        toggle.classList.remove('is-open');
       }
     });
   }
